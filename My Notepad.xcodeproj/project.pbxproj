@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B0C0AB304EBF591D0396A8C /* Pods_My_Notepad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDDA45386E9A580936EB47D /* Pods_My_Notepad.framework */; };
 		5654769622E9B99D00AD1092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654769522E9B99D00AD1092 /* AppDelegate.swift */; };
-		5654769822E9B99D00AD1092 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654769722E9B99D00AD1092 /* ViewController.swift */; };
 		5654769B22E9B99D00AD1092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5654769922E9B99D00AD1092 /* Main.storyboard */; };
 		5654769E22E9B99D00AD1092 /* My_Notepad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5654769C22E9B99D00AD1092 /* My_Notepad.xcdatamodeld */; };
 		565476A022E9B99E00AD1092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5654769F22E9B99E00AD1092 /* Assets.xcassets */; };
 		565476A322E9B99E00AD1092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565476A122E9B99E00AD1092 /* LaunchScreen.storyboard */; };
+		565476AF22E9C42A00AD1092 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565476AE22E9C42A00AD1092 /* FolderViewController.swift */; };
+		565476B122E9C59100AD1092 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565476B022E9C59100AD1092 /* NotesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C6FCCBBCA31B54C00D95B3F /* Pods-My Notepad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My Notepad.release.xcconfig"; path = "Target Support Files/Pods-My Notepad/Pods-My Notepad.release.xcconfig"; sourceTree = "<group>"; };
 		5654769222E9B99D00AD1092 /* My Notepad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Notepad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5654769522E9B99D00AD1092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5654769722E9B99D00AD1092 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5654769A22E9B99D00AD1092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5654769D22E9B99D00AD1092 /* My_Notepad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = My_Notepad.xcdatamodel; sourceTree = "<group>"; };
 		5654769F22E9B99E00AD1092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		565476A222E9B99E00AD1092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		565476A422E9B99E00AD1092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		565476AE22E9C42A00AD1092 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		565476B022E9C59100AD1092 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		CEDDA45386E9A580936EB47D /* Pods_My_Notepad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Notepad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECB112FF4B558616B9CA36A1 /* Pods-My Notepad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My Notepad.debug.xcconfig"; path = "Target Support Files/Pods-My Notepad/Pods-My Notepad.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B0C0AB304EBF591D0396A8C /* Pods_My_Notepad.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				5654769422E9B99D00AD1092 /* My Notepad */,
 				5654769322E9B99D00AD1092 /* Products */,
+				D5AAC1CBDB28DEAEE45C5F97 /* Pods */,
+				C81AB341A389D6FFBBD5E0C1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +66,65 @@
 			isa = PBXGroup;
 			children = (
 				5654769522E9B99D00AD1092 /* AppDelegate.swift */,
-				5654769722E9B99D00AD1092 /* ViewController.swift */,
-				5654769922E9B99D00AD1092 /* Main.storyboard */,
-				5654769F22E9B99E00AD1092 /* Assets.xcassets */,
-				565476A122E9B99E00AD1092 /* LaunchScreen.storyboard */,
+				565476AA22E9BB2900AD1092 /* Controllers */,
+				565476AB22E9BB6700AD1092 /* Data Model */,
+				565476AC22E9BB8E00AD1092 /* Views */,
+				565476AD22E9BBC200AD1092 /* Supporting Files */,
 				565476A422E9B99E00AD1092 /* Info.plist */,
-				5654769C22E9B99D00AD1092 /* My_Notepad.xcdatamodeld */,
 			);
 			path = "My Notepad";
+			sourceTree = "<group>";
+		};
+		565476AA22E9BB2900AD1092 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				565476AE22E9C42A00AD1092 /* FolderViewController.swift */,
+				565476B022E9C59100AD1092 /* NotesViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		565476AB22E9BB6700AD1092 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				5654769C22E9B99D00AD1092 /* My_Notepad.xcdatamodeld */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		565476AC22E9BB8E00AD1092 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5654769922E9B99D00AD1092 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		565476AD22E9BBC200AD1092 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5654769F22E9B99E00AD1092 /* Assets.xcassets */,
+				565476A122E9B99E00AD1092 /* LaunchScreen.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C81AB341A389D6FFBBD5E0C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDA45386E9A580936EB47D /* Pods_My_Notepad.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5AAC1CBDB28DEAEE45C5F97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECB112FF4B558616B9CA36A1 /* Pods-My Notepad.debug.xcconfig */,
+				1C6FCCBBCA31B54C00D95B3F /* Pods-My Notepad.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 565476A722E9B99E00AD1092 /* Build configuration list for PBXNativeTarget "My Notepad" */;
 			buildPhases = (
+				E75E3B9881CFB7EEF203D0D2 /* [CP] Check Pods Manifest.lock */,
 				5654768E22E9B99D00AD1092 /* Sources */,
 				5654768F22E9B99D00AD1092 /* Frameworks */,
 				5654769022E9B99D00AD1092 /* Resources */,
+				094F8CF53013A1C126F9C63C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,12 +195,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		094F8CF53013A1C126F9C63C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-My Notepad/Pods-My Notepad-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-My Notepad/Pods-My Notepad-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-My Notepad/Pods-My Notepad-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E75E3B9881CFB7EEF203D0D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-My Notepad-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5654768E22E9B99D00AD1092 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5654769822E9B99D00AD1092 /* ViewController.swift in Sources */,
+				565476B122E9C59100AD1092 /* NotesViewController.swift in Sources */,
+				565476AF22E9C42A00AD1092 /* FolderViewController.swift in Sources */,
 				5654769E22E9B99D00AD1092 /* My_Notepad.xcdatamodeld in Sources */,
 				5654769622E9B99D00AD1092 /* AppDelegate.swift in Sources */,
 			);
@@ -284,6 +389,7 @@
 		};
 		565476A822E9B99E00AD1092 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECB112FF4B558616B9CA36A1 /* Pods-My Notepad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +408,7 @@
 		};
 		565476A922E9B99E00AD1092 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C6FCCBBCA31B54C00D95B3F /* Pods-My Notepad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

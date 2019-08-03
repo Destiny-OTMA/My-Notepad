@@ -7,15 +7,13 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class FolderViewController: UITableViewController {
   
-  var folderArray = [Folder]()
+  let realm = try! Realm()
   
-  
-  
-  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  var folders: Results<Folder>?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,7 +26,7 @@ class FolderViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return folderArray.count
+    return folders?.count ?? 1
     
   }
   
@@ -36,15 +34,21 @@ class FolderViewController: UITableViewController {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath)
     
-    cell.textLabel?.text = folderArray[indexPath.row].name
+    cell.textLabel?.text = folders?[indexPath.row].name ?? "No folders added yet"
     
+    
+    // let folder = folderArray[indexPath.row]
+    
+    
+
     return cell
     
   }
   
   //MARK: - TableView Delegate Methods
   
-  // This code will launch the segue to open notes when a folder is chosen
+  // This code will launch the goToNotes segue
+  // The segue will open notes when a folder is chosen
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     performSegue(withIdentifier: "goToNotes", sender: self)
   }
@@ -53,7 +57,7 @@ class FolderViewController: UITableViewController {
     let destinationVC = segue.destination as! NotesViewController
     
     if let indexPath = tableView.indexPathForSelectedRow {
-      destinationVC.selectedFolder = folderArray[indexPath.row]
+      destinationVC.selectedFolder = folders?[indexPath.row]
       
     }
     
@@ -63,9 +67,12 @@ class FolderViewController: UITableViewController {
   
   //MARK: - Data Manipulation Methods
   
-  func saveFolders() {
+  func save(folder: Folder) {
+
     do {
-      try context.save()
+      try realm.write {
+        realm.add(folder)
+      }
     } catch {
       print("Error saving folder \(error)")
     }
@@ -77,16 +84,10 @@ class FolderViewController: UITableViewController {
   
   func loadFolders() {
     
-    let request : NSFetchRequest<Folder> = Folder.fetchRequest()
-    
-    do {
-      folderArray = try context.fetch(request)
-    } catch {
-      print("Error loading folders \(error)")
-    }
-    
+    folders = realm.objects(Folder.self)
+
     tableView.reloadData()
-    
+
   }
   
   
@@ -102,12 +103,10 @@ class FolderViewController: UITableViewController {
     let action = UIAlertAction(title: "Add", style: .default) { (action) in
       // what will happen when the add button is pressed?
       
-      let newFolder = Folder(context: self.context)
+      let newFolder = Folder()
       newFolder.name = textField.text!
-      
-      self.folderArray.append(newFolder)
-      
-      self.saveFolders()
+
+      self.save(folder: newFolder)
       
     }
     

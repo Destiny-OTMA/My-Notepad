@@ -19,9 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+    
+    // to locate and print out where the Realm datafile is located
+    print(Realm.Configuration.defaultConfiguration.fileURL)
+    
+    
+    do {
+      let realm = try Realm()
+    } catch {
+      print("Error initialising new realm, \(error)")
+    }
+    
     return true
   }
-
+  
+  
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

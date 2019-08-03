@@ -7,11 +7,13 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class NotesViewController: UITableViewController {
+      @IBOutlet weak var myTextField: UITextField!
 
-  var notesArray = [Note]()
+  var notesList : Results<Note>?
+  let realm = try! Realm()
 
   var selectedFolder : Folder? {
     didSet {
@@ -19,8 +21,6 @@ class NotesViewController: UITableViewController {
       
     }
   }
-  
-  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   
   override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class NotesViewController: UITableViewController {
 
     //TODO: Declare numberOfRowsInSection here:
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return notesArray.count
+    return notesList?.count ?? 1
   }
 
   //TODO: Declare cellForRowAtIndexPath here:
@@ -43,13 +43,14 @@ class NotesViewController: UITableViewController {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
     
-    let note = notesArray[indexPath.row]
+    if let note = notesList?[indexPath.row] {
+      
+      cell.textLabel?.text = note.title
+    } else {
+      cell.textLabel?.text = "No Notes Added"
+      
+    }
     
-    cell.textLabel?.text = note.title
-    
-    // Ternary operator ==>
-    // value = condition ? valueIfTrue : valueIfFalse
-    // cell.accessoryType = Note.done ? .checkmark : .none
     
     return cell
   }
@@ -58,23 +59,25 @@ class NotesViewController: UITableViewController {
   //MARK: - TableView Delegate Methods
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    //TODO: Add/Remove a checkmark to/from the cell
-    // if there is a checkmark already in the cell, toggle it off
-    
-    //        context.delete(itemArray[indexPath.row])
-    //        itemArray.remove(at: indexPath.row)
-    
-    // notesArray[indexPath.row].done = !notesArray[indexPath.row].done
-    
-    saveNotes()
-    
+
+    if let item = notesList?[indexPath.row] {
+      do {
+        try realm.write {
+          realm.delete(item)
+        }
+      } catch {
+        print("Error deleting the note, \(error)")
+      }
+    }
+
+//    tableView.reloadData()
+
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
   }
 
   
-  //MARK: - Add New Item to the list
+  //MARK: - Add a new note to the list
 
   @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
     
@@ -83,15 +86,22 @@ class NotesViewController: UITableViewController {
     let alert = UIAlertController(title: "Add New Note", message: "", preferredStyle: .alert)
     
     let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-      // what will happen once the user clicks the Add Item button on our UIAlert
+      // what will happen once the user clicks the Add Note button on our UIAlert
       
-      let newNote = Note(context: self.context)
-      newNote.title = textField.text!
-//      newNote.done = false
-      newNote.parentFolder = self.selectedFolder
-      self.notesArray.append(newNote)
-      
-      self.saveNotes()
+      if let currentFolder = self.selectedFolder {
+        do {
+          try self.realm.write {
+            let newNote = Note()
+            newNote.title = textField.text!
+            newNote.dateCreated = Date() // records current date/time when item is created
+            currentFolder.notes.append(newNote)
+          }
+        } catch {
+          print("Error saving new notes, \(error)")
+        }
+      }
+
+      self.tableView.reloadData()
       
     }
   
@@ -107,59 +117,76 @@ class NotesViewController: UITableViewController {
 
   }
 
-
-  //MARK: - Model Manipulation Methods
   
-  func saveNotes() {
+  //MARK: - Delete a note from the list
+  
+  @IBAction func deleteButtonPressed(_ sender: UIBarButtonItem) {
     
-    do {
-      try context.save()
-    } catch {
-      print("Error saving context \(error)")
+    // Declare Alert Message
+    let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this note?", preferredStyle: .alert)
+
+    // Create OK button with action handler
+    let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+      print("OK button was pressed")
+      self.tableView.reloadData()
+    })
+    
+    //Create CANCEL button with acton handler
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+      print("You pressed Cancel")
     }
     
-    self.tableView.reloadData()
+    // Add OK and Cancel buttons to dialog box
+    
+    dialogMessage.addAction(ok)
+    dialogMessage.addAction(cancel)
+
+    // Present dialog box to user
+    self.present(dialogMessage, animated: true, completion: nil)
+    
   }
   
   
-  func loadNotes(with request: NSFetchRequest<Note> = Note.fetchRequest(), predicate: NSPredicate? = nil) {
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  //MARK: - Model Manipulation Methods
+
+  func loadNotes() {
     
-    let notePredicate = NSPredicate(format: "parentFolder.name MATCHES %@", selectedFolder!.name!)
-    
-    if let additionalPredicate = predicate {
-      request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [notePredicate, additionalPredicate])
-    } else {
-      request.predicate = notePredicate
-    }
-    
-    do {
-      notesArray = try context.fetch(request)
-    } catch {
-      print("Error fetching data from context \(error)")
-    }
-    
+    notesList = selectedFolder?.notes.sorted(byKeyPath: "title", ascending: true)
+
     tableView.reloadData()
   }
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //MARK: - Search bar methods
 
@@ -167,16 +194,13 @@ extension NotesViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     
-    let request : NSFetchRequest<Note> = Note.fetchRequest()
+    notesList = notesList?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
     
-    let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-    
-    request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-    
-    loadNotes(with: request, predicate: predicate)
+    tableView.reloadData()
     
   }
-  
+
+
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchBar.text?.count == 0 {
       loadNotes()
@@ -184,9 +208,9 @@ extension NotesViewController: UISearchBarDelegate {
       DispatchQueue.main.async {
         searchBar.resignFirstResponder()
       }
-      
+
     }
-    
+
   }
-  
+
 }

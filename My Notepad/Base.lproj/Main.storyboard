@@ -80,11 +80,18 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Notes" id="wv9-dp-TFk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gx1-3K-dLq">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="Ow5-Hf-uXr" id="TtF-wK-BMS"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="Gx1-3K-dLq">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="Ow5-Hf-uXr" id="TtF-wK-BMS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="OCv-Ud-aNx">
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="Ow5-Hf-uXr" id="C63-fo-hYX"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

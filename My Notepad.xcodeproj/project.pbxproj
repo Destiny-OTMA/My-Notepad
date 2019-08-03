@@ -3,18 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0B0C0AB304EBF591D0396A8C /* Pods_My_Notepad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDDA45386E9A580936EB47D /* Pods_My_Notepad.framework */; };
 		5654769622E9B99D00AD1092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654769522E9B99D00AD1092 /* AppDelegate.swift */; };
 		5654769B22E9B99D00AD1092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5654769922E9B99D00AD1092 /* Main.storyboard */; };
-		5654769E22E9B99D00AD1092 /* My_Notepad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5654769C22E9B99D00AD1092 /* My_Notepad.xcdatamodeld */; };
 		565476A022E9B99E00AD1092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5654769F22E9B99E00AD1092 /* Assets.xcassets */; };
 		565476A322E9B99E00AD1092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565476A122E9B99E00AD1092 /* LaunchScreen.storyboard */; };
 		565476AF22E9C42A00AD1092 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565476AE22E9C42A00AD1092 /* FolderViewController.swift */; };
 		565476B122E9C59100AD1092 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565476B022E9C59100AD1092 /* NotesViewController.swift */; };
+		569B4A6F22F1AB2700FF6454 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4A6E22F1AB2700FF6454 /* Note.swift */; };
+		569B4A7322F1AB6600FF6454 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4A7222F1AB6600FF6454 /* Folder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +23,13 @@
 		5654769222E9B99D00AD1092 /* My Notepad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Notepad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5654769522E9B99D00AD1092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5654769A22E9B99D00AD1092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5654769D22E9B99D00AD1092 /* My_Notepad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = My_Notepad.xcdatamodel; sourceTree = "<group>"; };
 		5654769F22E9B99E00AD1092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		565476A222E9B99E00AD1092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		565476A422E9B99E00AD1092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		565476AE22E9C42A00AD1092 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		565476B022E9C59100AD1092 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		569B4A6E22F1AB2700FF6454 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		569B4A7222F1AB6600FF6454 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		CEDDA45386E9A580936EB47D /* Pods_My_Notepad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Notepad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB112FF4B558616B9CA36A1 /* Pods-My Notepad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My Notepad.debug.xcconfig"; path = "Target Support Files/Pods-My Notepad/Pods-My Notepad.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,7 +89,8 @@
 		565476AB22E9BB6700AD1092 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				5654769C22E9B99D00AD1092 /* My_Notepad.xcdatamodeld */,
+				569B4A7222F1AB6600FF6454 /* Folder.swift */,
+				569B4A6E22F1AB2700FF6454 /* Note.swift */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -123,7 +126,6 @@
 				ECB112FF4B558616B9CA36A1 /* Pods-My Notepad.debug.xcconfig */,
 				1C6FCCBBCA31B54C00D95B3F /* Pods-My Notepad.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -242,10 +244,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				569B4A6F22F1AB2700FF6454 /* Note.swift in Sources */,
 				565476B122E9C59100AD1092 /* NotesViewController.swift in Sources */,
 				565476AF22E9C42A00AD1092 /* FolderViewController.swift in Sources */,
-				5654769E22E9B99D00AD1092 /* My_Notepad.xcdatamodeld in Sources */,
 				5654769622E9B99D00AD1092 /* AppDelegate.swift in Sources */,
+				569B4A7322F1AB6600FF6454 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,19 +450,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5654769C22E9B99D00AD1092 /* My_Notepad.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5654769D22E9B99D00AD1092 /* My_Notepad.xcdatamodel */,
-			);
-			currentVersion = 5654769D22E9B99D00AD1092 /* My_Notepad.xcdatamodel */;
-			path = My_Notepad.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5654768A22E9B99D00AD1092 /* Project object */;
 }

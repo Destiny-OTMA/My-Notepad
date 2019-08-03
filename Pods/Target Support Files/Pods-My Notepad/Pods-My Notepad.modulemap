@@ -1,0 +1,6 @@
+framework module Pods_My_Notepad {
+  umbrella header "Pods-My Notepad-umbrella.h"
+
+  export *
+  module * { export * }
+}

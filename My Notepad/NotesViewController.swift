@@ -10,10 +10,12 @@ import UIKit
 import RealmSwift
 
 class NotesViewController: UITableViewController {
-      @IBOutlet weak var myTextField: UITextField!
 
   var notesList : Results<Note>?
   let realm = try! Realm()
+  
+  // Create a variable that is a collection of results that are Folder objects
+  var folders: Results<Folder>?
 
   var selectedFolder : Folder? {
     didSet {
@@ -46,11 +48,14 @@ class NotesViewController: UITableViewController {
     if let note = notesList?[indexPath.row] {
       
       cell.textLabel?.text = note.title
+// Spacer
+// Spacer
+// Spacer
+// Spacer
     } else {
       cell.textLabel?.text = "No Notes Added"
       
     }
-    
     
     return cell
   }
@@ -63,14 +68,15 @@ class NotesViewController: UITableViewController {
     if let item = notesList?[indexPath.row] {
       do {
         try realm.write {
-          realm.delete(item)
+//          item.done = !item.done  // There is no 'done' used for checkmarks in this app
         }
       } catch {
-        print("Error deleting the note, \(error)")
+        print("Error saving done status, \(error)")
       }
     }
 
-//    tableView.reloadData()
+    // Call all the Tableview Datasource methods
+    tableView.reloadData()
 
     tableView.deselectRow(at: indexPath, animated: true)
 
@@ -101,7 +107,8 @@ class NotesViewController: UITableViewController {
         }
       }
 
-      self.tableView.reloadData()
+      // Call all the Tableview Datasource methods
+     self.tableView.reloadData()
       
     }
   
@@ -118,75 +125,18 @@ class NotesViewController: UITableViewController {
   }
 
   
-  //MARK: - Delete a note from the list
-  
-  @IBAction func deleteButtonPressed(_ sender: UIBarButtonItem) {
-    
-    // Declare Alert Message
-    let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this note?", preferredStyle: .alert)
-
-    // Create OK button with action handler
-    let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-      print("OK button was pressed")
-      self.tableView.reloadData()
-    })
-    
-    //Create CANCEL button with acton handler
-    let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
-      print("You pressed Cancel")
-    }
-    
-    // Add OK and Cancel buttons to dialog box
-    
-    dialogMessage.addAction(ok)
-    dialogMessage.addAction(cancel)
-
-    // Present dialog box to user
-    self.present(dialogMessage, animated: true, completion: nil)
-    
-  }
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
   //MARK: - Model Manipulation Methods
 
   func loadNotes() {
     
     notesList = selectedFolder?.notes.sorted(byKeyPath: "title", ascending: true)
 
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
   }
   
 }
+
 
 //MARK: - Search bar methods
 
@@ -196,10 +146,10 @@ extension NotesViewController: UISearchBarDelegate {
     
     notesList = notesList?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
     
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
     
   }
-
 
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchBar.text?.count == 0 {

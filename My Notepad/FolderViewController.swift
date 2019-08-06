@@ -11,12 +11,16 @@ import RealmSwift
 
 class FolderViewController: UITableViewController {
   
+  //Initialize a new access point to the Realm database
   let realm = try! Realm()
   
+  // Create a variable that is a collection of results that are Folder objects
   var folders: Results<Folder>?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
     loadFolders()
     
@@ -26,6 +30,7 @@ class FolderViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
+    // Return the number of Folders as the NumberOfRowsInSection, if there are none, it returns 1
     return folders?.count ?? 1
     
   }
@@ -35,11 +40,6 @@ class FolderViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath)
     
     cell.textLabel?.text = folders?[indexPath.row].name ?? "No folders added yet"
-    
-    
-    // let folder = folderArray[indexPath.row]
-    
-    
 
     return cell
     
@@ -58,11 +58,9 @@ class FolderViewController: UITableViewController {
     
     if let indexPath = tableView.indexPathForSelectedRow {
       destinationVC.selectedFolder = folders?[indexPath.row]
-      
     }
     
   }
-  
   
   
   //MARK: - Data Manipulation Methods
@@ -77,6 +75,7 @@ class FolderViewController: UITableViewController {
       print("Error saving folder \(error)")
     }
     
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
     
   }
@@ -86,10 +85,10 @@ class FolderViewController: UITableViewController {
     
     folders = realm.objects(Folder.self)
 
+    // Call all the Tableview Datasource methods
     tableView.reloadData()
 
   }
-  
   
   
   //MARK: - Add New Folders (was Categories)
@@ -121,6 +120,5 @@ class FolderViewController: UITableViewController {
     present(alert, animated: true, completion: nil)
     
   }
-  
   
 }

@@ -11,6 +11,7 @@ import RealmSwift
 
 class Note: Object {
   @objc dynamic var title : String = ""
+  @objc dynamic var done : Bool = false
   @objc dynamic var dateCreated : Date?
   let items = List<Note>()
   var parentFolder = LinkingObjects(fromType: Folder.self, property: "notes")

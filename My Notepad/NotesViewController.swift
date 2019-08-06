@@ -48,10 +48,10 @@ class NotesViewController: UITableViewController {
     if let note = notesList?[indexPath.row] {
       
       cell.textLabel?.text = note.title
-// Spacer
-// Spacer
-// Spacer
-// Spacer
+      
+      // Ternary operator ==>
+      // value = condition ? valueIfTrue : valueIfFalse
+      cell.accessoryType = note.done ? .checkmark : .none
     } else {
       cell.textLabel?.text = "No Notes Added"
       
@@ -68,7 +68,7 @@ class NotesViewController: UITableViewController {
     if let item = notesList?[indexPath.row] {
       do {
         try realm.write {
-//          item.done = !item.done  // There is no 'done' used for checkmarks in this app
+          item.done = !item.done  // There is no 'done' used for checkmarks in this app
         }
       } catch {
         print("Error saving done status, \(error)")

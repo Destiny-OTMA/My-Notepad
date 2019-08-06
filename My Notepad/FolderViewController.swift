@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
 class FolderViewController: UITableViewController {
   
@@ -20,11 +21,15 @@ class FolderViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    //    This next line prints the location of the Realm database when un-commented out
+    //    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
     loadFolders()
     
+    tableView.rowHeight = 80.0
+    
   }
+  
   
   //MARK: - TableView Datasource Methods
   
@@ -37,10 +42,10 @@ class FolderViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath)
-    
+    let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath) as! SwipeTableViewCell
     cell.textLabel?.text = folders?[indexPath.row].name ?? "No folders added yet"
-
+    cell.delegate = self
+    
     return cell
     
   }
@@ -66,7 +71,7 @@ class FolderViewController: UITableViewController {
   //MARK: - Data Manipulation Methods
   
   func save(folder: Folder) {
-
+    
     do {
       try realm.write {
         realm.add(folder)
@@ -84,10 +89,10 @@ class FolderViewController: UITableViewController {
   func loadFolders() {
     
     folders = realm.objects(Folder.self)
-
+    
     // Call all the Tableview Datasource methods
     tableView.reloadData()
-
+    
   }
   
   
@@ -104,7 +109,7 @@ class FolderViewController: UITableViewController {
       
       let newFolder = Folder()
       newFolder.name = textField.text!
-
+      
       self.save(folder: newFolder)
       
     }
@@ -122,3 +127,40 @@ class FolderViewController: UITableViewController {
   }
   
 }
+
+//MARK: - Swipe Cell Delegate Methods
+
+extension FolderViewController: SwipeTableViewCellDelegate {
+  
+  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+    
+    guard orientation == .right else { return nil }
+    
+    let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+      // handle action by updating model with deletion
+      
+      if let folderForDeletion = self.folders?[indexPath.row] {
+        do {
+          try self.realm.write {
+            self.realm.delete(folderForDeletion)
+          }
+        } catch {
+          print("Error deleting folder, \(error)")
+        }
+        
+        // Call all the Tableview Datasource methods
+        tableView.reloadData()
+      }
+      
+    }
+    
+    // customize the action appearance
+    deleteAction.image = UIImage(named: "delete-icon")
+    
+    return [deleteAction]
+  }
+  
+}
+
+
+

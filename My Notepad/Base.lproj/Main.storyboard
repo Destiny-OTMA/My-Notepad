@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FolderCell" id="6On-ea-aFG">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FolderCell" id="6On-ea-aFG" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6On-ea-aFG" id="t5J-qY-U5A">
@@ -96,18 +96,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Notes" id="wv9-dp-TFk">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="Gx1-3K-dLq">
-                                <connections>
-                                    <action selector="addButtonPressed:" destination="Ow5-Hf-uXr" id="TtF-wK-BMS"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="edit" id="xu2-6S-aPH">
-                                <connections>
-                                    <action selector="goToEdit:" destination="Ow5-Hf-uXr" id="Ybu-x3-gzM"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gx1-3K-dLq">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="Ow5-Hf-uXr" id="TtF-wK-BMS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

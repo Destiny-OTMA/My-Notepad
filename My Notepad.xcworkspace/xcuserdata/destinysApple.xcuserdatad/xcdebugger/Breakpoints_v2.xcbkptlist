@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "My Notepad/EditViewController.swift"
+            timestampString = "586659994.075027"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "EditViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.myTextField.getter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.621045"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "86">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.myTextField.setter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.625465"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.myTextField.modify : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.6273381"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "69">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.myTextField.modify : Swift.Optional&lt;__C.UITextField&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.629041"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.init(style: __C.UITableViewStyle) -&gt; My_Notepad.EditViewController"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.630958"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; My_Notepad.EditViewController"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.633697"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "My_Notepad.EditViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;My_Notepad.EditViewController&gt;"
+                  moduleName = "My Notepad"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/destinysApple/Desktop/%20School%20Courses/%20(CP)%20Extra%20Practice%20with%20Apps/My%20Notepad/My%20Notepad/EditViewController.swift"
+                  timestampString = "586659995.636543"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

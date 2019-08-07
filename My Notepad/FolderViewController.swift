@@ -8,9 +8,8 @@
 
 import UIKit
 import RealmSwift
-import SwipeCellKit
 
-class FolderViewController: UITableViewController {
+class FolderViewController: SwipeTableViewController {
   
   //Initialize a new access point to the Realm database
   let realm = try! Realm()
@@ -20,7 +19,8 @@ class FolderViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    // Do any additional setup after loading the view.
+
     //    This next line prints the location of the Realm database when un-commented out
     //    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
@@ -42,9 +42,9 @@ class FolderViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell", for: indexPath) as! SwipeTableViewCell
+    let cell = super.tableView(tableView, cellForRowAt: indexPath)
+    
     cell.textLabel?.text = folders?[indexPath.row].name ?? "No folders added yet"
-    cell.delegate = self
     
     return cell
     
@@ -53,7 +53,7 @@ class FolderViewController: UITableViewController {
   //MARK: - TableView Delegate Methods
   
   // This code will launch the goToNotes segue
-  // The segue will open notes when a folder is chosen
+  // The segue will open the related notes list when a folder is chosen
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     performSegue(withIdentifier: "goToNotes", sender: self)
   }
@@ -85,7 +85,6 @@ class FolderViewController: UITableViewController {
     
   }
   
-  
   func loadFolders() {
     
     folders = realm.objects(Folder.self)
@@ -94,9 +93,25 @@ class FolderViewController: UITableViewController {
     tableView.reloadData()
     
   }
+
   
+  //MARK: Delete Data From Swipe
   
-  //MARK: - Add New Folders (was Categories)
+  override func updateModel(at indexPath: IndexPath) {
+    
+    if let folderForDeletion = self.folders?[indexPath.row] {
+      do {
+        try self.realm.write {
+          self.realm.delete(folderForDeletion)
+        }
+      } catch {
+        print("Error deleting folder, \(error)")
+      }
+    }
+  }
+
+  
+  //Mark: - Add New Folders
   
   @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
     
@@ -127,40 +142,4 @@ class FolderViewController: UITableViewController {
   }
   
 }
-
-//MARK: - Swipe Cell Delegate Methods
-
-extension FolderViewController: SwipeTableViewCellDelegate {
-  
-  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-    
-    guard orientation == .right else { return nil }
-    
-    let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-      // handle action by updating model with deletion
-      
-      if let folderForDeletion = self.folders?[indexPath.row] {
-        do {
-          try self.realm.write {
-            self.realm.delete(folderForDeletion)
-          }
-        } catch {
-          print("Error deleting folder, \(error)")
-        }
-        
-        // Call all the Tableview Datasource methods
-        tableView.reloadData()
-      }
-      
-    }
-    
-    // customize the action appearance
-    deleteAction.image = UIImage(named: "delete-icon")
-    
-    return [deleteAction]
-  }
-  
-}
-
-
 

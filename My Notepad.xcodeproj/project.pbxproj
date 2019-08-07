@@ -14,6 +14,7 @@
 		565476A322E9B99E00AD1092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 565476A122E9B99E00AD1092 /* LaunchScreen.storyboard */; };
 		565476AF22E9C42A00AD1092 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565476AE22E9C42A00AD1092 /* FolderViewController.swift */; };
 		565476B122E9C59100AD1092 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565476B022E9C59100AD1092 /* NotesViewController.swift */; };
+		5664985F22F9DDB800EDADA2 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5664985E22F9DDB800EDADA2 /* SwipeTableViewController.swift */; };
 		569B4A6F22F1AB2700FF6454 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4A6E22F1AB2700FF6454 /* Note.swift */; };
 		569B4A7322F1AB6600FF6454 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4A7222F1AB6600FF6454 /* Folder.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		565476A422E9B99E00AD1092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		565476AE22E9C42A00AD1092 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		565476B022E9C59100AD1092 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		5664985E22F9DDB800EDADA2 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		569B4A6E22F1AB2700FF6454 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		569B4A7222F1AB6600FF6454 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		CEDDA45386E9A580936EB47D /* Pods_My_Notepad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Notepad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 			children = (
 				565476AE22E9C42A00AD1092 /* FolderViewController.swift */,
 				565476B022E9C59100AD1092 /* NotesViewController.swift */,
+				5664985E22F9DDB800EDADA2 /* SwipeTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				565476B122E9C59100AD1092 /* NotesViewController.swift in Sources */,
 				565476AF22E9C42A00AD1092 /* FolderViewController.swift in Sources */,
 				5654769622E9B99D00AD1092 /* AppDelegate.swift in Sources */,
+				5664985F22F9DDB800EDADA2 /* SwipeTableViewController.swift in Sources */,
 				569B4A7322F1AB6600FF6454 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

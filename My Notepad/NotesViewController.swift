@@ -9,14 +9,14 @@
 import UIKit
 import RealmSwift
 
-class NotesViewController: UITableViewController {
-
-  var notesList : Results<Note>?
+class NotesViewController: SwipeTableViewController {
+  
+  //Initialize a new access point to the Realm database
   let realm = try! Realm()
   
   // Create a variable that is a collection of results that are Folder objects
-  var folders: Results<Folder>?
-
+  var notesList : Results<Note>?
+  
   var selectedFolder : Folder? {
     didSet {
       loadNotes()
@@ -25,25 +25,26 @@ class NotesViewController: UITableViewController {
   }
   
   override func viewDidLoad() {
-        super.viewDidLoad()
+    super.viewDidLoad()
     // Do any additional setup after loading the view.
-
+    
     print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
-    }
-
+  }
   
-    // MARK: - Tableview Datasource Methods
-
-    //TODO: Declare numberOfRowsInSection here:
+  
+  // MARK: - Tableview Datasource Methods
+  
+  //TODO: Declare numberOfRowsInSection here:
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return notesList?.count ?? 1
   }
-
+  
+  
   //TODO: Declare cellForRowAtIndexPath here:
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
+    let cell = super.tableView(tableView, cellForRowAt: indexPath)
     
     if let note = notesList?[indexPath.row] {
       
@@ -54,37 +55,36 @@ class NotesViewController: UITableViewController {
       cell.accessoryType = note.done ? .checkmark : .none
     } else {
       cell.textLabel?.text = "No Notes Added"
-      
     }
     
     return cell
   }
 
-  
+
   //MARK: - TableView Delegate Methods
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    
     if let item = notesList?[indexPath.row] {
       do {
         try realm.write {
-          item.done = !item.done  // There is no 'done' used for checkmarks in this app
+          item.done = !item.done
         }
       } catch {
         print("Error saving done status, \(error)")
       }
     }
-
+    
     // Call all the Tableview Datasource methods
     tableView.reloadData()
-
+    
     tableView.deselectRow(at: indexPath, animated: true)
-
+    
   }
-
+  
   
   //MARK: - Add a new note to the list
-
+  
   @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
     
     var textField = UITextField()
@@ -106,12 +106,12 @@ class NotesViewController: UITableViewController {
           print("Error saving new notes, \(error)")
         }
       }
-
+      
       // Call all the Tableview Datasource methods
-     self.tableView.reloadData()
+      self.tableView.reloadData()
       
     }
-  
+    
     // add a text field to the pop up alert
     alert.addTextField { (alertTextField) in
       alertTextField.placeholder = "Create new note"
@@ -121,46 +121,56 @@ class NotesViewController: UITableViewController {
     alert.addAction(action)
     
     present(alert, animated: true, completion: nil)
-
+    
   }
-
+  
   
   //MARK: - Model Manipulation Methods
-
+  
   func loadNotes() {
     
     notesList = selectedFolder?.notes.sorted(byKeyPath: "title", ascending: true)
-
+    
     // Call all the Tableview Datasource methods
     tableView.reloadData()
   }
   
-}
-
-
-//MARK: - Search bar methods
-
-extension NotesViewController: UISearchBarDelegate {
-  
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    
-    notesList = notesList?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
-    
-    // Call all the Tableview Datasource methods
-    tableView.reloadData()
-    
-  }
-
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    if searchBar.text?.count == 0 {
-      loadNotes()
-      
-      DispatchQueue.main.async {
-        searchBar.resignFirstResponder()
+  override func updateModel(at indexPath: IndexPath) {
+    if let item = notesList?[indexPath.row] {
+      do {
+        try realm.write {
+          realm.delete(item)
+        }
+      } catch {
+        print("Error deleting item, \(error)")
       }
-
     }
-
   }
-
+}
+  
+  //MARK: - Search bar methods
+  
+  extension NotesViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+      
+      notesList = notesList?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
+      
+      // Call all the Tableview Datasource methods
+      tableView.reloadData()
+      
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+      if searchBar.text?.count == 0 {
+        loadNotes()
+        
+        DispatchQueue.main.async {
+          searchBar.resignFirstResponder()
+        }
+        
+      }
+      
+    }
+    
 }

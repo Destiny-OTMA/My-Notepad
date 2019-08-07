@@ -12,6 +12,7 @@ import RealmSwift
 class Folder: Object {
   // Create a new property
   @objc dynamic var name : String = ""
+  @objc dynamic var cellBGColor : String = ""
   // define a forward relationship
   let notes = List<Note>()
 }

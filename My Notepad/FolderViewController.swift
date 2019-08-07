@@ -2,12 +2,13 @@
 //  FolderViewController.swift
 //  My Notepad
 //
-//  Created by Destiny Sopha on 7/25/19.
+//  Created by Destiny Sopha on 7/25/2019.
 //  Copyright © 2019 Destiny Sopha. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class FolderViewController: SwipeTableViewController {
   
@@ -22,11 +23,11 @@ class FolderViewController: SwipeTableViewController {
     // Do any additional setup after loading the view.
 
     //    This next line prints the location of the Realm database when un-commented out
-    //    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
     loadFolders()
     
-    tableView.rowHeight = 80.0
+    tableView.separatorStyle = .none
     
   }
   
@@ -44,14 +45,27 @@ class FolderViewController: SwipeTableViewController {
     
     let cell = super.tableView(tableView, cellForRowAt: indexPath)
     
-    cell.textLabel?.text = folders?[indexPath.row].name ?? "No folders added yet"
+    if let category = folders?[indexPath.row] {
+      
+      cell.textLabel?.text = category.name ?? "No categories added yet"
+      
+      // Then save the color as a UIColor.
+      cell.backgroundColor = UIColor(hexString: category.cellBGColor ?? "1D9BF6")
+      
+    }
+
+    cell.textLabel?.text = folders?[indexPath.row].name ?? "No categories added yet"
+    
+    // Then save the color as a UIColor.
+    // cell.backgroundColor = UIColor(hexstring: cellBGColor)
+    cell.backgroundColor = UIColor(hexString: folders?[indexPath.row].cellBGColor ?? "1D9BF6")
     
     return cell
     
   }
   
-  //MARK: - TableView Delegate Methods
-  
+  //Mark: - TableView Delegate Methods
+
   // This code will launch the goToNotes segue
   // The segue will open the related notes list when a folder is chosen
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -124,6 +138,7 @@ class FolderViewController: SwipeTableViewController {
       
       let newFolder = Folder()
       newFolder.name = textField.text!
+      newFolder.cellBGColor = UIColor.randomFlat.hexValue()
       
       self.save(folder: newFolder)
       

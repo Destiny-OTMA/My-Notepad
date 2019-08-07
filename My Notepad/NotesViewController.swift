@@ -59,8 +59,8 @@ class NotesViewController: SwipeTableViewController {
     
     return cell
   }
-
-
+  
+  
   //MARK: - TableView Delegate Methods
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -147,30 +147,30 @@ class NotesViewController: SwipeTableViewController {
     }
   }
 }
+
+//MARK: - Search bar methods
+
+extension NotesViewController: UISearchBarDelegate {
   
-  //MARK: - Search bar methods
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    
+    notesList = notesList?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
+    
+    // Call all the Tableview Datasource methods
+    tableView.reloadData()
+    
+  }
   
-  extension NotesViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchBar.text?.count == 0 {
+      loadNotes()
       
-      notesList = notesList?.filter("title CONTAINS[cd] %@", searchBar.text).sorted(byKeyPath: "dateCreated", ascending: true)
-      
-      // Call all the Tableview Datasource methods
-      tableView.reloadData()
-      
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      if searchBar.text?.count == 0 {
-        loadNotes()
-        
-        DispatchQueue.main.async {
-          searchBar.resignFirstResponder()
-        }
-        
+      DispatchQueue.main.async {
+        searchBar.resignFirstResponder()
       }
       
     }
     
+  }
+  
 }

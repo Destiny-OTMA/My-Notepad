@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class NotesViewController: SwipeTableViewController {
   
@@ -28,10 +29,25 @@ class NotesViewController: SwipeTableViewController {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
     
-    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    //  This next line prints the location of the Realm database when un-commented out
+    // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
+    tableView.separatorStyle = .none
+
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    // Set the color and title of the note list title bar to match the chosen folder
+    if let colorHex = selectedFolder?.cellBGColor {
+      
+      title = selectedFolder!.name
+      
+      guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
+      
+      navBar.barTintColor = UIColor(hexString: colorHex)
+    }
+  }
+
   
   // MARK: - Tableview Datasource Methods
   
@@ -49,6 +65,15 @@ class NotesViewController: SwipeTableViewController {
     if let note = notesList?[indexPath.row] {
       
       cell.textLabel?.text = note.title
+      
+      if let bgColor = UIColor(hexString: selectedFolder!.cellBGColor)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(notesList!.count)) {
+        cell.backgroundColor = bgColor
+        cell.textLabel?.textColor = ContrastColorOf(bgColor, returnFlat: true) // sets text to contrast the background color
+      }
+      
+      //      print("version 1: \(CGFloat(indexPath.row / notesList!.count))")
+      //      print("version 2: \(CGFloat(indexPath.row) / CGFloat(notesList!.count))")
+      
       
       // Ternary operator ==>
       // value = condition ? valueIfTrue : valueIfFalse

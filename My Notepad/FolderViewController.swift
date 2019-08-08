@@ -59,7 +59,8 @@ class FolderViewController: SwipeTableViewController {
     // Then save the color as a UIColor.
     // cell.backgroundColor = UIColor(hexstring: cellBGColor)
     cell.backgroundColor = UIColor(hexString: folders?[indexPath.row].cellBGColor ?? "1D9BF6")
-    
+    cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true) // sets text to contrast the background color
+
     return cell
     
   }

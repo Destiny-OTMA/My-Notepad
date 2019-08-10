@@ -23,7 +23,7 @@ class FolderViewController: SwipeTableViewController {
     // Do any additional setup after loading the view.
 
     //    This next line prints the location of the Realm database when un-commented out
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    //    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     
     loadFolders()
     
@@ -32,7 +32,7 @@ class FolderViewController: SwipeTableViewController {
   }
   
   
-  //MARK: - TableView Datasource Methods
+  //Mark: - TableView Datasource Methods
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
@@ -45,25 +45,23 @@ class FolderViewController: SwipeTableViewController {
     
     let cell = super.tableView(tableView, cellForRowAt: indexPath)
     
-    if let category = folders?[indexPath.row] {
+    if let folder = folders?[indexPath.row] {
       
-      cell.textLabel?.text = category.name ?? "No categories added yet"
+      cell.textLabel?.text = folder.name
+      
+      guard let folderColor = UIColor(hexString: folder.cellBGColor) else {fatalError()}
       
       // Then save the color as a UIColor.
-      cell.backgroundColor = UIColor(hexString: category.cellBGColor ?? "1D9BF6")
+      cell.backgroundColor = folderColor
       
+      // Then save the color as a UIColor.
+      // cell.backgroundColor = UIColor(hexstring: cellBGColor)
+      cell.textLabel?.textColor = ContrastColorOf(folderColor,returnFlat: true) // sets text to contrast the background color
     }
-
-    cell.textLabel?.text = folders?[indexPath.row].name ?? "No categories added yet"
     
-    // Then save the color as a UIColor.
-    // cell.backgroundColor = UIColor(hexstring: cellBGColor)
-    cell.backgroundColor = UIColor(hexString: folders?[indexPath.row].cellBGColor ?? "1D9BF6")
-    cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true) // sets text to contrast the background color
-
     return cell
-    
   }
+  
   
   //Mark: - TableView Delegate Methods
 

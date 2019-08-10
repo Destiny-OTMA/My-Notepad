@@ -12,6 +12,9 @@ import ChameleonFramework
 
 class NotesViewController: SwipeTableViewController {
   
+  @IBOutlet weak var searchBar: UISearchBar!
+
+  
   //Initialize a new access point to the Realm database
   let realm = try! Realm()
   
@@ -37,20 +40,44 @@ class NotesViewController: SwipeTableViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    // Set the color and title of the note list title bar to match the chosen folder
-    if let colorHex = selectedFolder?.cellBGColor {
-      
-      title = selectedFolder!.name
-      
-      guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
-      
-      navBar.barTintColor = UIColor(hexString: colorHex)
-    }
+    
+    // Set the title of the chosen folder for the Notes Title Bar
+    title = selectedFolder?.name
+    
+    // Set the color of the note list Title Bar to match the chosen folder
+    guard let colorHex = selectedFolder?.cellBGColor else { fatalError() }
+    
+    updateNavBar(withHexCode: colorHex)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    
+    updateNavBar(withHexCode: "1D9BF6")
+    
+  }
+  
+  
+  //MARK: - Nav Bar Setup Methods
+  
+  func updateNavBar(withHexCode colorHexCode: String) {
+    
+    // Check to see if there already is a Nav Bar
+    guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
+    
+    guard let navBarColor = UIColor(hexString: colorHexCode) else { fatalError() }
+    
+    navBar.barTintColor = navBarColor
+    
+    navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+    
+    navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+    
+    searchBar.barTintColor = navBarColor
   }
 
   
-  // MARK: - Tableview Datasource Methods
-  
+  //MARK: - Tableview Datasource Methods
+
   //TODO: Declare numberOfRowsInSection here:
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return notesList?.count ?? 1
@@ -73,7 +100,6 @@ class NotesViewController: SwipeTableViewController {
       
       //      print("version 1: \(CGFloat(indexPath.row / notesList!.count))")
       //      print("version 2: \(CGFloat(indexPath.row) / CGFloat(notesList!.count))")
-      
       
       // Ternary operator ==>
       // value = condition ? valueIfTrue : valueIfFalse

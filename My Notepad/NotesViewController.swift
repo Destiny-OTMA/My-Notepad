@@ -91,6 +91,7 @@ class NotesViewController: SwipeTableViewController {
     
     if let note = notesList?[indexPath.row] {
       
+      cell.textLabel?.numberOfLines = 0 // set cell to use as many line as necessary for text
       cell.textLabel?.text = note.title
       
       if let bgColor = UIColor(hexString: selectedFolder!.cellBGColor)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(notesList!.count)) {
